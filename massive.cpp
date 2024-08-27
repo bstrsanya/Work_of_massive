@@ -10,7 +10,7 @@ void PrintfOneMossive (int* data, size_t size);
 
 void EachPlusConst (int* data_2);
 
-void PrintTwoMossive (int data[][6], size_t nStolb, size_t nStrock);
+void PrintTwoMossive (int* data, size_t nStolb, size_t nStrock);
 
 int main()
 {
@@ -18,12 +18,15 @@ int main()
 
     int data_2[6] = {100, 200, 300, 400, 500, -1};
 
-    int data_bin[][6] = {{10, 11, 12, 13, 14, 15},
+    int data_bin[][6] = {{10, 11, 12, 13, 14, 15}, // int* data[] -> int* data
                          {20, 21, 22, 23, 24, 25},
                          {30, 31, 32, 33, 34, 35},
                          {40, 41, 42, 43, 44, 45}};
     
-    PrintTwoMossive (data_bin, sizeof (data_bin[0]) / sizeof (data_bin[0][0]), sizeof (data_bin) / sizeof (data_bin[0]));
+    //data_bin = (int*)data_bin;
+    
+
+    PrintTwoMossive ((int*) data_bin, sizeof (data_bin[0]) / sizeof (data_bin[0][0]), sizeof (data_bin) / sizeof (data_bin[0]));
 
     //ShiftOneElementLeft (data, sizeof (data) / sizeof (data[0]));
     //PrintfOneMossive (data, sizeof (data) / sizeof (data[0]));
@@ -63,12 +66,12 @@ void EachPlusConst (int* data_2)
     }
 }
 
-void PrintTwoMossive (int data[][6], size_t nStolb, size_t nStrock)
+void PrintTwoMossive (int* data, size_t nStolb, size_t nStrock)
 {
     for (size_t y = 0; y < nStrock; y++)
         {
         for (size_t x = 0; x < nStolb; x++)
-            printf("%d ", data[y][x]);
+            printf("%d ", *((int*) data + y * nStolb + x));
         printf ("\n");
         }
 }
